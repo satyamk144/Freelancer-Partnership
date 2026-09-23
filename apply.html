@@ -283,30 +283,36 @@
         <p>अपनी आवश्यकता और कार्य का विवरण भरें, हम आपसे शीघ्र संपर्क करेंगे।</p>
       </div>
 
-      <form id="workForm" onsubmit="submitForm(event)">
+      <form id="workForm">
+        <!-- Web3Forms Access Key Place Here -->
+        <input type="hidden" name="access_key" value="8774b977-a8b3-4a05-8098-0590e9ea77d8">
+        
+        <!-- Form Subject for Email -->
+        <input type="hidden" name="subject" value="New Work Application from Website">
+
         <!-- Name -->
         <div class="form-group">
           <label for="fullName">आपका नाम (Full Name) <span>*</span></label>
-          <input type="text" id="fullName" class="form-control" placeholder="उदा. Rahul Kumar" required>
+          <input type="text" name="Name" id="fullName" class="form-control" placeholder="उदा. Rahul Kumar" required>
         </div>
 
         <!-- Contact & Location -->
         <div class="grid-2">
           <div class="form-group">
             <label for="phone">मोबाइल / WhatsApp नंबर <span>*</span></label>
-            <input type="tel" id="phone" class="form-control" placeholder="उदा. 9142743004" required>
+            <input type="tel" name="Mobile" id="phone" class="form-control" placeholder="उदा. 9142743004" required>
           </div>
 
           <div class="form-group">
             <label for="district">ज़िला / ब्लॉक (Location)</label>
-            <input type="text" id="district" class="form-control" placeholder="उदा. Patna, Bihar">
+            <input type="text" name="Location" id="district" class="form-control" placeholder="उदा. Patna, Bihar">
           </div>
         </div>
 
         <!-- Work Category -->
         <div class="form-group">
           <label for="workCategory">कार्य का प्रकार (Work Category) <span>*</span></label>
-          <select id="workCategory" class="form-control" required>
+          <select name="Category" id="workCategory" class="form-control" required>
             <option value="" disabled selected>-- कार्य चुनें --</option>
             <option value="Court Related Work">⚖️ Court Related Work (कोर्ट संबंधित कार्य)</option>
             <option value="Bihar Block Related Work">🏛️ Bihar Block Related Work (ब्लॉक संबंधित कार्य)</option>
@@ -321,20 +327,23 @@
         <!-- Work Details -->
         <div class="form-group">
           <label for="workDetails">कार्य का पूरा विवरण (Work Description) <span>*</span></label>
-          <textarea id="workDetails" class="form-control" placeholder="कृपया अपने काम के बारे में विस्तार से बताएं..." required></textarea>
+          <textarea name="Work_Description" id="workDetails" class="form-control" placeholder="कृपया अपने काम के बारे में विस्तार से बताएं..." required></textarea>
         </div>
 
         <!-- Preferred Time -->
         <div class="form-group">
           <label for="contactTime">संपर्क करने का समय (Preferred Time)</label>
-          <input type="text" id="contactTime" class="form-control" placeholder="उदा. Morning 10 AM - 2 PM">
+          <input type="text" name="Preferred_Time" id="contactTime" class="form-control" placeholder="उदा. Morning 10 AM - 2 PM">
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn-submit">
-          🚀 Send Application (WhatsApp पर भेजें)
+        <button type="submit" id="submitBtn" class="btn-submit">
+          🚀 Submit Application
         </button>
       </form>
+
+      <!-- On-screen Success / Error Message -->
+      <div id="statusMsg" style="display:none; margin-top: 20px; text-align: center; font-weight: 600; padding: 15px; border-radius: 8px;"></div>
 
       <div class="footer-note">
         Direct Enquiry? Call us at <a href="tel:9142743004">9142743004</a>
@@ -343,32 +352,58 @@
   </main>
 
   <script>
-    function submitForm(event) {
-      event.preventDefault();
-      
-      const name = document.getElementById('fullName').value;
-      const phone = document.getElementById('phone').value;
-      const district = document.getElementById('district').value || 'Not specified';
-      const category = document.getElementById('workCategory').value;
-      const details = document.getElementById('workDetails').value;
-      const time = document.getElementById('contactTime').value || 'Anytime';
+    const form = document.getElementById('workForm');
+    const statusMsg = document.getElementById('statusMsg');
+    const submitBtn = document.getElementById('submitBtn');
 
-      // WhatsApp message structure
-      const message = `*New Work Application*%0A%0A` +
-                      `*Name:* ${encodeURIComponent(name)}%0A` +
-                      `*Phone:* ${encodeURIComponent(phone)}%0A` +
-                      `*Location:* ${encodeURIComponent(district)}%0A` +
-                      `*Category:* ${encodeURIComponent(category)}%0A` +
-                      `*Preferred Time:* ${encodeURIComponent(time)}%0A%0A` +
-                      `*Work Description:*%0A${encodeURIComponent(details)}`;
-
-      const targetPhone = '919142743004';
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
       
-      // Open WhatsApp with pre-filled details
-      window.open(`https://wa.me/${targetPhone}?text=${message}`, '_blank');
-    }
+      submitBtn.innerText = "Submitting Application...";
+      submitBtn.disabled = true;
+
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      })
+      .then(async (response) => {
+        let res = await response.json();
+        if (response.status == 200) {
+          statusMsg.style.display = "block";
+          statusMsg.style.background = "rgba(34, 197, 94, 0.2)";
+          statusMsg.style.color = "#4ade80";
+          statusMsg.style.border = "1px solid #22c55e";
+          statusMsg.innerHTML = "🎉 आपका आवेदन सफलतापूर्वक जमा हो गया है! हम आपसे शीघ्र संपर्क करेंगे।";
+          form.reset();
+        } else {
+          statusMsg.style.display = "block";
+          statusMsg.style.background = "rgba(239, 68, 68, 0.2)";
+          statusMsg.style.color = "#f87171";
+          statusMsg.style.border = "1px solid #ef4444";
+          statusMsg.innerHTML = "❌ आवेदन जमा नहीं हो पाया। कृपया पुनः प्रयास करें।";
+        }
+      })
+      .catch(error => {
+        statusMsg.style.display = "block";
+        statusMsg.style.background = "rgba(239, 68, 68, 0.2)";
+        statusMsg.style.color = "#f87171";
+        statusMsg.style.border = "1px solid #ef4444";
+        statusMsg.innerHTML = "❌ सर्वर समस्या। कृपया कुछ समय बाद प्रयास करें।";
+      })
+      .then(() => {
+        submitBtn.innerText = "🚀 Submit Application";
+        submitBtn.disabled = false;
+      });
+    });
   </script>
 
 </body>
 </html>
-

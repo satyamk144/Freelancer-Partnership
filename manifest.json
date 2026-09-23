@@ -1,0 +1,20 @@
+{
+  "name": "Satyam Kumar - Freelancer & Partnership Services",
+  "short_name": "Satyam Services",
+  "description": "Professional Freelancer & Partnership Services by Satyam Kumar.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08090b",
+  "theme_color": "#f5b81b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ],
+  "shortcuts": [
+    {"name":"Contact Satyam","short_name":"Contact","url":"./index.html#contact","icons":[{"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png"}]},
+    {"name":"View Services","short_name":"Services","url":"./index.html#services","icons":[{"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png"}]},
+    {"name":"View Photos","short_name":"Gallery","url":"./index.html#gallery","icons":[{"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png"}]}
+  ]
+}

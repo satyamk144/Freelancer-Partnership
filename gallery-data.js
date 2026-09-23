@@ -1,1 +1,1 @@
-window.SATYAM_GALLERY = [];
+window.SATYAM_GALLERY = [{"src":"./assets/Screenshot_2026-09-23-09-02-53-45_320a9a695de7cdce83ed5281148d6f19.webp","alt":"Screenshot 2026 09 23 09 02 53 45 320A9A695De7Cdce83Ed5281148D6F19 – Satyam Kumar","width":1079,"height":1506}];

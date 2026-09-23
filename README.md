@@ -2,7 +2,7 @@
 
 Professional Freelancer & Partnership Services for individuals, schools, offices and organizations.
 
-🌐 **Live Website:** `https://satyam144.github.io/Freelancer-Partnership/`
+🌐 **Live Website:**  https://satyamk144.github.io/Freelancer-Partnership/
 
 ---
 

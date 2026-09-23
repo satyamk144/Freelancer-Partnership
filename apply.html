@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f5b01b">
+  <title>Apply For Work | Satyam Kumar - Freelancer & Partnership Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0b0d;
+      --card-bg: #141419;
+      --card-border: #24242e;
+      --accent-yellow: #f5b01b;
+      --accent-hover: #d99a12;
+      --text-white: #ffffff;
+      --text-muted: #a0a0ab;
+      --input-bg: #1c1c24;
+      --input-border: #323240;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: rgba(11, 11, 13, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-white);
+    }
+
+    .brand-logo {
+      background: var(--accent-yellow);
+      color: #000;
+      font-weight: 700;
+      font-size: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .brand-text small {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .back-btn {
+      color: var(--text-white);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      transition: 0.2s;
+    }
+
+    .back-btn:hover {
+      border-color: var(--accent-yellow);
+      color: var(--accent-yellow);
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 680px;
+      margin: 30px auto;
+      padding: 0 20px 50px;
+      width: 100%;
+    }
+
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(245,176,27,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .form-header {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(245, 176, 27, 0.15);
+      color: var(--accent-yellow);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(245, 176, 27, 0.3);
+    }
+
+    .form-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .form-header p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Form Styling */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #e0e0e6;
+    }
+
+    .form-group label span {
+      color: var(--accent-yellow);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      color: var(--text-white);
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-yellow);
+      box-shadow: 0 0 0 3px rgba(245, 176, 27, 0.15);
+    }
+
+    select.form-control option {
+      background: #181820;
+      color: var(--text-white);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .form-card {
+        padding: 20px;
+      }
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      background: var(--accent-yellow);
+      color: #000;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-note a {
+      color: var(--accent-yellow);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">S</div>
+        <div class="brand-text">
+          <strong>Satyam Kumar</strong>
+          <small>Freelancer & Partnership</small>
+        </div>
+      </a>
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
+  </header>
+
+  <!-- Form Container -->
+  <main class="main-container">
+    <div class="form-card">
+      <div class="form-header">
+        <span class="badge">ONLINE WORK APPLICATION</span>
+        <h1>Apply For Work</h1>
+        <p>अपनी आवश्यकता और कार्य का विवरण भरें, हम आपसे शीघ्र संपर्क करेंगे।</p>
+      </div>
+
+      <form id="workForm" onsubmit="submitForm(event)">
+        <!-- Name -->
+        <div class="form-group">
+          <label for="fullName">आपका नाम (Full Name) <span>*</span></label>
+          <input type="text" id="fullName" class="form-control" placeholder="उदा. Rahul Kumar" required>
+        </div>
+
+        <!-- Contact & Location -->
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="phone">मोबाइल / WhatsApp नंबर <span>*</span></label>
+            <input type="tel" id="phone" class="form-control" placeholder="उदा. 9142743004" required>
+          </div>
+
+          <div class="form-group">
+            <label for="district">ज़िला / ब्लॉक (Location)</label>
+            <input type="text" id="district" class="form-control" placeholder="उदा. Patna, Bihar">
+          </div>
+        </div>
+
+        <!-- Work Category -->
+        <div class="form-group">
+          <label for="workCategory">कार्य का प्रकार (Work Category) <span>*</span></label>
+          <select id="workCategory" class="form-control" required>
+            <option value="" disabled selected>-- कार्य चुनें --</option>
+            <option value="Court Related Work">⚖️ Court Related Work (कोर्ट संबंधित कार्य)</option>
+            <option value="Bihar Block Related Work">🏛️ Bihar Block Related Work (ब्लॉक संबंधित कार्य)</option>
+            <option value="School Management & Administration">🏫 School Management & Administration</option>
+            <option value="Documents & Office Work">📄 Documents & Office Work</option>
+            <option value="Freelancer Work">💼 Freelancer Work / Projects</option>
+            <option value="Partnership Services">🤝 Partnership Services</option>
+            <option value="Other Work">❓ Any Other Work (अन्य कार्य)</option>
+          </select>
+        </div>
+
+        <!-- Work Details -->
+        <div class="form-group">
+          <label for="workDetails">कार्य का पूरा विवरण (Work Description) <span>*</span></label>
+          <textarea id="workDetails" class="form-control" placeholder="कृपया अपने काम के बारे में विस्तार से बताएं..." required></textarea>
+        </div>
+
+        <!-- Preferred Time -->
+        <div class="form-group">
+          <label for="contactTime">संपर्क करने का समय (Preferred Time)</label>
+          <input type="text" id="contactTime" class="form-control" placeholder="उदा. Morning 10 AM - 2 PM">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit">
+          🚀 Send Application (WhatsApp पर भेजें)
+        </button>
+      </form>
+
+      <div class="footer-note">
+        Direct Enquiry? Call us at <a href="tel:9142743004">9142743004</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('fullName').value;
+      const phone = document.getElementById('phone').value;
+      const district = document.getElementById('district').value || 'Not specified';
+      const category = document.getElementById('workCategory').value;
+      const details = document.getElementById('workDetails').value;
+      const time = document.getElementById('contactTime').value || 'Anytime';
+
+      // WhatsApp message structure
+      const message = `*New Work Application*%0A%0A` +
+                      `*Name:* ${encodeURIComponent(name)}%0A` +
+                      `*Phone:* ${encodeURIComponent(phone)}%0A` +
+                      `*Location:* ${encodeURIComponent(district)}%0A` +
+                      `*Category:* ${encodeURIComponent(category)}%0A` +
+                      `*Preferred Time:* ${encodeURIComponent(time)}%0A%0A` +
+                      `*Work Description:*%0A${encodeURIComponent(details)}`;
+
+      const targetPhone = '919142743004';
+      
+      // Open WhatsApp with pre-filled details
+      window.open(`https://wa.me/${targetPhone}?text=${message}`, '_blank');
+    }
+  </script>
+
+</body>
+</html>
+
